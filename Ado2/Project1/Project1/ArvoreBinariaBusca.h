@@ -27,13 +27,25 @@ Node *BuscaArvoreIterativa(Node *raiz, int n)
 	return raiz;
 }
 
-struct Tree *InsereRecursivo(struct Tree *raiz, Node *novo) {
-	if (raiz == NULL) 
-		return novo;
-	if (raiz->valor > novo->valor)
-		raiz->esq = InsereRecursivo(raiz->esq, novo);
+Node *NewNode(int v)
+{
+	Node *novo = (Node*)malloc(sizeof(Node));
+	novo->valor = v;
+	novo->dir = NULL;
+	novo->esq = NULL;
+
+	return novo;
+}
+
+struct Tree *InsereRecursivo(struct Tree *raiz, int v) {
+	if (raiz == NULL)
+	{
+		return NewNode(v);
+	}
+	if (raiz->valor > v)
+		raiz->esq = InsereRecursivo(raiz->esq, v);
 	else
-		raiz->dir = InsereRecursivo(raiz->dir, novo);
+		raiz->dir = InsereRecursivo(raiz->dir, v);
 	return raiz;
 }
 
@@ -47,18 +59,64 @@ void InsereIterativo(Node *p, int v)
 			printf("Elemento ja existe!");
 			return;
 		}
-		if (v < p->valor) p = p->esq;
-		else p = p->dir;
+		if (v < p->valor) 
+			p = p->esq;
+		else 
+			p = p->dir;
 	} // while
-	novo = (Node*)malloc(sizeof(Node));
-	novo->valor = v;
-	if (p == NULL)
-		p = novo;
-	else {
-		if (v < q->valor)
-			q->esq = novo;
-		else q->dir = novo;
+	novo = NewNode(v);
+
+	if (v < q->valor)
+		q->esq = novo;
+	else 
+		q->dir = novo;
+}
+
+Node * NodeMinValue(Node *raiz) {
+	Node *temp = raiz;
+
+	while (temp->esq != NULL)
+	{
+		temp = temp->esq;
 	}
+
+	return temp;
+}
+
+Node * RemoveArvore(Node *r, int v) {
+	if (r == NULL)
+	{
+		return r;
+	}
+
+	if (v < r->valor)
+	{
+		r->esq = RemoveArvore(r->esq, v);
+	}
+	else if (v > r->valor) {
+		r->dir = RemoveArvore(r->dir, v);
+	}
+	else 
+	{
+		if (r->esq == NULL)
+		{
+			Node *temp = r->dir;
+			free(r);
+			return temp;
+		}
+		else if (r->dir == NULL) {
+			Node *temp = r->esq;
+			free(r);
+			return temp;
+		}
+		else {
+			Node *temp = NodeMinValue(r->dir);
+			r->valor = temp->valor;
+			r->dir = RemoveArvore(r->dir, temp->valor);
+		}
+	}
+
+	return r;
 }
 
 void InOrdem(Node *n)
@@ -66,21 +124,27 @@ void InOrdem(Node *n)
 	if (n != NULL)
 	{
 		InOrdem(n->esq);
-		printf("%d\n", n->valor);
+		printf("%d ", n->valor);
 		InOrdem(n->dir);
 	}
 }
 
 void PreOrdem(Node *n)
 {
-	printf("%d\n", n->valor);
-	PreOrdem(n->esq);
-	PreOrdem(n->dir);
+	if (n != NULL)
+	{
+		printf("%d ", n->valor);
+		PreOrdem(n->esq);
+		PreOrdem(n->dir);
+	}
 }
 
 void PosOrdem(Node *n)
 {
-	PosOrdem(n->esq);
-	PosOrdem(n->dir);
-	printf("%d\n", n->valor);
+	if (n != NULL)
+	{
+		PosOrdem(n->esq);
+		PosOrdem(n->dir);
+		printf("%d ", n->valor);
+	}
 }
