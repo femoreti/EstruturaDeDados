@@ -32,12 +32,16 @@ void Escolha(Node *r)
 		case 1:
 			printf("Digite o valor a ser inserido iterativamente: ");
 			scanf_s("%d", &q);
-			InsereIterativo(r, q);
+
+			if (r == NULL)
+				r = NewNode(q);
+			else
+				InsereIterativo(r, q);
 			break;
 		case 2:
 			printf("Digite o valor a ser inserido recursivamente: ");
 			scanf_s("%d", &q);
-			InsereRecursivo(r, q);
+			r = InsereRecursivo(r, q);
 			break;
 		default:
 			printf("invalido!\n");
@@ -120,7 +124,7 @@ void Escolha(Node *r)
 int main(void) 
 {
 	// your code goes here
-	Node *arvore = NewNode(10);
+	Node *arvore = NULL;
 
 	Escolha(arvore);
 

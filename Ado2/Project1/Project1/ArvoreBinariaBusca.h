@@ -49,20 +49,27 @@ struct Tree *InsereRecursivo(struct Tree *raiz, int v) {
 	return raiz;
 }
 
-void InsereIterativo(Node *p, int v)
+void InsereIterativo(Node *arvore, int v)
 {
 	Node *q, *novo;
 	q = NULL;
-	while (p != NULL) {
-		q = p;
-		if (v == p->valor) {
+
+	if (arvore == NULL)
+	{
+		arvore = NewNode(v);
+		return;
+	}
+
+	while (arvore != NULL) {
+		q = arvore;
+		if (v == arvore->valor) {
 			printf("Elemento ja existe!");
 			return;
 		}
-		if (v < p->valor) 
-			p = p->esq;
+		if (v < arvore->valor) 
+			arvore = arvore->esq;
 		else 
-			p = p->dir;
+			arvore = arvore->dir;
 	} // while
 	novo = NewNode(v);
 
