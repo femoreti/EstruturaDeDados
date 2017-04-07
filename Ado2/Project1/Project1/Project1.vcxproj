@@ -20,7 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArvoreBinariaBusca.h" />
-    <ClInclude Include="Grafos.h" />
+    <ClInclude Include="GrafoLista.h" />
+    <ClInclude Include="GrafosMatriz.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.c" />

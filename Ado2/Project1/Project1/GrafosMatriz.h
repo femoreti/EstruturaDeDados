@@ -29,6 +29,7 @@ Grafo initGrafoMatrizAdj(int V) {
 	G->Vertex = V;
 	G->Arestas = 0;
 	G->adj = initMatrizAdj(V, V, 0);
+	
 	return G;
 }
 
@@ -53,8 +54,23 @@ void printMatrizAdj(Grafo G) {
 	{//a cada linha
 		for (w = 0; w < G->Vertex; w++)
 		{//colunas
-			printf_s("%d ", G->adj[v][w]);
+			printf("%d ", G->adj[v][w]);
 		}
-		printf_s("\n");
+		printf("\n");
 	}
+	printf("\n");
+}
+
+int calculaGrauMatriz(Grafo g, int vertice)
+{
+	int i, grau = 0;
+	for (i = 0; i < g->Vertex; i++)
+	{
+		if (g->adj[i][vertice] == 1)
+			grau++;
+	}
+
+	printf("vertice %d tem grau: %d", vertice, grau);
+
+	return grau;
 }

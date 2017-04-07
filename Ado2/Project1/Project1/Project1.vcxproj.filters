@@ -18,7 +18,10 @@
     <ClInclude Include="ArvoreBinariaBusca.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Grafos.h">
+    <ClInclude Include="GrafoLista.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GrafosMatriz.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
