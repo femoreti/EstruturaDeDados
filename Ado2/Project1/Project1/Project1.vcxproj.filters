@@ -18,9 +18,15 @@
     <ClInclude Include="ArvoreBinariaBusca.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Grafos.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGrafo.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -120,7 +120,7 @@ void Escolha(Node *r)
 
 	Escolha(r);
 }
-
+/*
 int main(void) 
 {
 	// your code goes here
@@ -132,4 +132,4 @@ int main(void)
 	//scanf_s("%d", &q);
 	
 	return 0;
-}
+}*/

@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArvoreBinariaBusca.h" />
+    <ClInclude Include="Grafos.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.c" />
+    <ClCompile Include="MainGrafo.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C3D86670-F852-487E-9489-733E530E6995}</ProjectGuid>

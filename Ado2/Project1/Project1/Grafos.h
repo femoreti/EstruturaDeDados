@@ -1,64 +1,60 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define vertex int
 
-/* REPRESENTAÇÃO POR MATRIZ DE ADJACÊNCIAS: A estrutura digraph representa um digrafo. O campo adj é um ponteiro para a matriz de adjacências do digrafo. O campo V contém o número de vértices e o campo A contém o número de arcos do digrafo. */
-
-struct digraph {
-	int V;
-	int A;
+typedef struct digrafo {
+	int Vertex;
+	int Arestas;
 	int **adj;
-};
-/* Um Digraph é um ponteiro para um digraph, ou seja, um Digraph contém o endereço de um digraph. */
+} *Grafo;
 
-typedef struct digraph *Digraph;
+static int **initMatrizAdj(int linha, int coluna, int val) {
+	vertex i, j;
+	int **matriz = (int**)malloc(linha * sizeof(int *)); //define numero de linhas e aloca memoria
+	for (i = 0; i < linha; i++) //linhas
+		matriz[i] = (int*)malloc(coluna * sizeof(int)); //aloca memoria para colunas na linha
+	for (i = 0; i < linha; i++)
+	{//a cada linha
+		for (j = 0; j < coluna; j++)
+		{//colunas
+			matriz[i][j] = val;
+		}
+	}
+	return matriz;
+}
 
-/* REPRESENTAÇÃO POR MATRIZ DE ADJACÊNCIAS: A função DIGRAPHinit() constrói um digrafo com vértices 0 1 .. V-1 e nenhum arco. */
-
-Digraph DIGRAPHinit(int V) {
-	Digraph G = malloc(sizeof *G);
-	G->V = V;
-	G->A = 0;
-	G->adj = MATRIXint(V, V, 0);
+Grafo initGrafoMatrizAdj(int V) {
+	Grafo G = (Grafo)malloc(sizeof *G);
+	G->Vertex = V;
+	G->Arestas = 0;
+	G->adj = initMatrizAdj(V, V, 0);
 	return G;
 }
-/* REPRESENTAÇÃO POR MATRIZ DE ADJACÊNCIAS: A função MATRIXint() aloca uma matriz com linhas 0..r-1 e colunas 0..c-1. Cada elemento da matriz recebe valor val. */
 
-static int **MATRIXint(int r, int c, int val) {
-	vertex i, j;
-	int **m = malloc(r * sizeof(int *));
-	for (i = 0; i < r; i++)
-		m[i] = malloc(c * sizeof(int));
-	for (i = 0; i < r; i++)
-		for (j = 0; j < c; j++)
-			m[i][j] = val;
-	return m;
-}
-/* REPRESENTAÇÃO POR MATRIZ DE ADJACÊNCIAS: A função DIGRAPHinsertA() insere um arco v-w no digrafo G. A função supõe que v e w são distintos, positivos e menores que G->V. Se o digrafo já tem um arco v-w, a função não faz nada. */
-
-void DIGRAPHinsertA(Digraph G, vertex v, vertex w) {
+void GrafoInsereAdj(Grafo G, vertex v, vertex w) {
 	if (G->adj[v][w] == 0) {
 		G->adj[v][w] = 1;
-		G->A++;
+		G->Arestas++;
 	}
 }
-/* REPRESENTAÇÃO POR MATRIZ DE ADJACÊNCIAS: A função DIGRAPHremoveA() remove do digrafo G o arco v-w. A função supõe que v e w são distintos, positivos e menores que G->V. Se não existe arco v-w, a função não faz nada. */
 
-void DIGRAPHremoveA(Digraph G, vertex v, vertex w) {
+void GrafoRemoveAdj(Grafo G, vertex v, vertex w) {
 	if (G->adj[v][w] == 1) {
 		G->adj[v][w] = 0;
-		G->A--;
+		G->Arestas--;
 	}
 }
-/* REPRESENTAÇÃO POR MATRIZ DE ADJACÊNCIAS: A função DIGRAPHshow() imprime, para cada vértice v do digrafo G, em uma linha, todos os vértices adjacentes a v. */
 
-void DIGRAPHshow(Digraph G) {
+void printMatrizAdj(Grafo G) {
 	vertex v, w;
-	for (v = 0; v < G->V; v++) {
-		printf("%2d:", v);
-		for (w = 0; w < G->V; w++)
-			if (G->adj[v][w] == 1)
-				printf(" %2d", w);
-		printf("\n");
+
+	for (v = 0; v < G->Vertex; v++)
+	{//a cada linha
+		for (w = 0; w < G->Vertex; w++)
+		{//colunas
+			printf_s("%d ", G->adj[v][w]);
+		}
+		printf_s("\n");
 	}
 }
