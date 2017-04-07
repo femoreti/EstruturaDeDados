@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #define vertex int
-
 /* REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A estrutura digraph representa um digrafo. O campo adj é um ponteiro para o vetor de listas de adjacência, o campo V contém o número de vértices e o campo A contém o número de arcos do digrafo. */
 
 typedef struct Node {
@@ -103,4 +102,131 @@ int calculaGrauLista(Grafo *g, int vertice)
 
 	printf("vertice %d tem grau: %d", vertice, grau);
 	return grau;
+}
+
+typedef struct obj {
+	int v;
+	struct obj *proximo;
+}obj;
+
+typedef struct Fila {
+	int total;
+	struct obj *ultimo, *primeiro;
+} Fila;
+
+void addFila(Fila *f, int v)
+{
+	obj *novo = (obj*)malloc(sizeof(obj));
+	novo->proximo = NULL;
+	novo->v = v;
+
+	if (f->total == 0)
+	{
+		f->primeiro = novo;
+		f->ultimo = novo;
+	}
+	else
+	{
+		f->ultimo->proximo = novo;
+		f->ultimo = novo;
+	}
+
+	f->total++;
+}
+
+void removeFila(Fila *f)
+{
+	obj *temp = f->primeiro;
+	f->primeiro = f->primeiro->proximo;
+
+	free(temp);
+	f->total--;
+}
+
+void BuscaLarguraLista(Grafo *g, vertex inicio)
+{
+	int u = 0;
+
+	int *cor = (int*)malloc(g->Vertices * sizeof(int));
+	int *pi = (int*)malloc(g->Vertices * sizeof(int));
+	Fila *Q = (Fila*)malloc(g->Vertices * sizeof(Fila));
+	Q->total = 0;
+	Q->ultimo = NULL;
+	Q->primeiro = NULL;
+
+	int i;
+	for (i = 0; i < g->Vertices; i++)
+	{
+		cor[i] = 0; // branco 0, cinza 1, preto 2
+		pi[i] = NULL;
+	}
+	cor[inicio] = 1;
+	addFila(Q, g->adj[inicio].v);
+	printf("%2d", g->adj[inicio].v);
+
+	while (Q->total != 0)
+	{
+		u = Q->primeiro->v;
+
+		Noh *n;
+		for(n = g->adj[u].proximo; n != NULL; n = n->proximo)
+		{
+			if (cor[n->v] == 0)
+			{
+				cor[n->v] = 1;
+				pi[n->v] = u;
+				addFila(Q, n->v);
+
+				printf("%2d", n->v);
+			}
+		}
+		removeFila(Q);
+		cor[u] = 2;
+	}
+
+	printf("\n");
+}
+
+void DFSVisit(int u, int *cor, int *pi, Grafo *g)
+{
+	cor[u] = 1;
+
+	Noh *n;
+	for (n = g->adj[u].proximo; n != NULL; n = n->proximo)
+	{
+		if (cor[n->v] == 0)
+		{
+			pi[n->v] = u;
+			DFSVisit(n->v, cor, pi, g);
+		}
+	}
+
+	cor[u] = 2;
+
+	printf("%2d", g->adj[u].v);
+}
+
+void BuscaProfundidadeLista(Grafo *g) 
+{
+	int u = 0;
+
+	int *cor = (int*)malloc(g->Vertices * sizeof(int));
+	int *pi = (int*)malloc(g->Vertices * sizeof(int));
+
+	int i;
+	for (i = 0; i < g->Vertices; i++)
+	{
+		cor[i] = 0; // branco 0, cinza 1, preto 2
+		pi[i] = NULL;
+	}
+
+	for (u = 0; u < g->Vertices; u++)
+	{
+		if (cor[u] == 0)
+		{
+			DFSVisit(u, cor, pi, g);
+		}
+	}
+
+	printf("\n");
 }
