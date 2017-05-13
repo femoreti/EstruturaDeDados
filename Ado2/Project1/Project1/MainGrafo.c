@@ -3,25 +3,25 @@
 
 //#include "GrafosMatriz.h"
 #include "GrafoLista.h"
-
+/*
 int main(void)
 {
 	//Matriz de adjacencia
 
-	/*Grafo g = initGrafoMatrizAdj(5);
-	printMatrizAdj(g);
-
-	GrafoInsereAdj(g, 3, 0);
-	GrafoInsereAdj(g, 3, 2);
-	GrafoInsereAdj(g, 1, 4);
-	GrafoInsereAdj(g, 1, 1);
-	GrafoInsereAdj(g, 2, 1);
-	GrafoInsereAdj(g, 2, 4);
-	GrafoInsereAdj(g, 0, 4);
-	printf_s("\n");
-	printMatrizAdj(g);
-
-	calculaGrauMatriz(g, 3);*/
+	//Grafo g = initGrafoMatrizAdj(5);
+	//printMatrizAdj(g);
+	//
+	//GrafoInsereAdj(g, 3, 0);
+	//GrafoInsereAdj(g, 3, 2);
+	//GrafoInsereAdj(g, 1, 4);
+	//GrafoInsereAdj(g, 1, 1);
+	//GrafoInsereAdj(g, 2, 1);
+	//GrafoInsereAdj(g, 2, 4);
+	//GrafoInsereAdj(g, 0, 4);
+	//printf_s("\n");
+	//printMatrizAdj(g);
+	//
+	//calculaGrauMatriz(g, 3);
 
 
 	//Lista de Adjacencia
@@ -52,4 +52,4 @@ int main(void)
 	scanf_s("%d", &q);
 
 	return 0;
-}
+}*/

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
 #include "ArvoreBinariaBusca.h"
 
 void Escolha(Node *r)
@@ -120,7 +120,7 @@ void Escolha(Node *r)
 
 	Escolha(r);
 }
-/*
+
 int main(void) 
 {
 	// your code goes here
@@ -132,4 +132,5 @@ int main(void)
 	//scanf_s("%d", &q);
 	
 	return 0;
-}*/
+}
+*/
