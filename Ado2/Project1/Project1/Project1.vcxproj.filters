@@ -24,12 +24,18 @@
     <ClInclude Include="GrafosMatriz.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ArvoreAVL.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainGrafo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainAVL.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

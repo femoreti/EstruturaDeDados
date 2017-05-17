@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArvoreAVL.h" />
     <ClInclude Include="ArvoreBinariaBusca.h" />
     <ClInclude Include="GrafoLista.h" />
     <ClInclude Include="GrafosMatriz.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.c" />
+    <ClCompile Include="MainAVL.c" />
     <ClCompile Include="MainGrafo.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

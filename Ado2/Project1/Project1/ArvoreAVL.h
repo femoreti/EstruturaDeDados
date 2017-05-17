@@ -131,42 +131,82 @@ Node *InsereAVL(Node *n, int valor, int *verificaAltura)
 	return n;
 }
 
-/*
-Node * RemoveArvore(Node *r, int v) {
-	if (r == NULL)
-	{
-		return r;
-	}
+Node *maisDireita(Node *p)
+{
+	while (p->dir != NULL)
+		p = p->dir;
 
-	if (v < r->dado)
+	return p;
+}
+
+Node *maisEsquerda(Node *p)
+{
+	while (p->esq != NULL)
+		p = p->esq;
+
+	return p;
+}
+
+Node *RemoveArvore(Node *r, int k) 
+{
+	// se nao encontrou volta na recursao
+	if (r == NULL) return NULL;
+	else 
 	{
-		r->esq = RemoveArvore(r->esq, v);
-	}
-	else if (v > r->dado) {
-		r->dir = RemoveArvore(r->dir, v);
-	}
-	else
-	{
-		if (r->esq == NULL)
+		if (k < r->dado)
 		{
-			Node *temp = r->dir;
-			free(r);
-			return temp;
+			r->esq = RemoveArvore(r->esq, k);
+			r->bal += 1;
+
+			if (r->bal == 2)
+			{
+				caso2(r);
+			}
 		}
-		else if (r->dir == NULL) {
-			Node *temp = r->esq;
-			free(r);
-			return temp;
+		else if (k > r->dado) 
+		{
+			r->dir = RemoveArvore(r->dir, k);
+			r->bal -= 1;
+
+			if (r->bal == -1)
+			{
+				caso1(r);
+			}
 		}
-		else {
-			Node *temp = NodeMinValue(r->dir);
-			r->dado = temp->dado;
-			r->dir = RemoveArvore(r->dir, temp->dado);
+		else // se encontrou o no
+		{
+			// verifica se o noh tem filho a esquerda
+			if (r->esq != NULL)
+			{
+				// buscar o filho mais a direita da subarvore esquerda
+				Node *aux = maisDireita(r->esq);
+				r->dado = aux->dado;
+				// remover o filho mais a direita da subarvore esquerda
+				r->esq = RemoveArvore(r->esq, aux->dado);
+
+				
+			}
+			else if (r->dir != NULL)
+			{
+				// buscar o filho mais a
+				// esquerda da subarvore direita
+				Node *aux = maisEsquerda(r->dir);
+				r->dado = aux->dado;
+				// remover o filho mais a
+				// esquerda da subarvore direita
+				r->dir = RemoveArvore(r->dir, aux->dado);
+				
+			}
+			else
+			{
+				free(r);
+				r = NULL;
+			}
 		}
 	}
 
 	return r;
-}*/
+}
 
 Node *BuscaArvoreRecursiva(Node *raiz, int n)
 {
@@ -205,7 +245,7 @@ void PosOrdem(Node *n)
 	{
 		PosOrdem(n->esq);
 		PosOrdem(n->dir);
-		printf("%d ", n->dado);
+		//printf("%d ", n->dado);
 	}
 }
 
@@ -218,7 +258,7 @@ int VerificarSeAVL(Node *n)
 
 		PosOrdem(n->esq);
 		PosOrdem(n->dir);
-		printf("%d ", n->dado);
+		//printf("%d ", n->dado);
 	}
 
 	return 1;

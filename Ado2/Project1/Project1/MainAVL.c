@@ -17,6 +17,9 @@ int main(void)
 	n = InsereAVL(n, 48, &h);
 	printf("\n");
 	PreOrdem(n);
+	printf("\n"); printf("\n");
+	RemoveArvore(n, 15);
+	PreOrdem(n);
 
 	Node *temp = BuscaArvoreRecursiva(n, 41);
 	if (temp != NULL)

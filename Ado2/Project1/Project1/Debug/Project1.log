@@ -1,5 +1,13 @@
-﻿  MainGrafo.c
-c:\users\felipe\desktop\estrutura de dados\trunk\ado2\project1\project1\grafolista.h(161): warning C4047: '=': 'int' differs in levels of indirection from 'void *'
-c:\users\felipe\desktop\estrutura de dados\trunk\ado2\project1\project1\grafolista.h(220): warning C4047: '=': 'int' differs in levels of indirection from 'void *'
-  Project1.vcxproj -> C:\Users\Felipe\Desktop\Estrutura de dados\trunk\Ado2\Project1\Debug\Project1.exe
-  Project1.vcxproj -> C:\Users\Felipe\Desktop\Estrutura de dados\trunk\Ado2\Project1\Debug\Project1.pdb (Partial PDB)
+﻿  MainAVL.c
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(10): warning C4047: 'function': 'int *' differs in levels of indirection from 'int **'
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(10): warning C4024: 'InsereAVL': different types for formal and actual parameter 3
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(11): warning C4047: 'function': 'int *' differs in levels of indirection from 'int **'
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(11): warning C4024: 'InsereAVL': different types for formal and actual parameter 3
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(15): warning C4047: 'function': 'int *' differs in levels of indirection from 'int **'
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(15): warning C4024: 'InsereAVL': different types for formal and actual parameter 3
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(16): warning C4047: 'function': 'int *' differs in levels of indirection from 'int **'
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(16): warning C4024: 'InsereAVL': different types for formal and actual parameter 3
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(17): warning C4047: 'function': 'int *' differs in levels of indirection from 'int **'
+c:\users\felipe.moreti\desktop\senac\estrutura de dados\trunk\ado2\project1\project1\mainavl.c(17): warning C4024: 'InsereAVL': different types for formal and actual parameter 3
+  Project1.vcxproj -> C:\Users\felipe.moreti\Desktop\senac\Estrutura de dados\trunk\Ado2\Project1\Debug\Project1.exe
+  Project1.vcxproj -> C:\Users\felipe.moreti\Desktop\senac\Estrutura de dados\trunk\Ado2\Project1\Debug\Project1.pdb (Partial PDB)
