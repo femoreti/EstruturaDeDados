@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 enum Cor { preto = 0, vermelho };
 
 typedef struct Tree {
@@ -6,25 +9,25 @@ typedef struct Tree {
 	enum Cor cor;
 } Node;
 
-Node *NewNode(int v, enum Cor novaCor)
+Node *NewNode(int v, enum Cor novaCor, Node *nulo)
 {
 	Node *novo = (Node*)malloc(sizeof(Node));
 	novo->dado = v;
-	novo->dir = (v != -1) ? NewNode(-1, preto) : NULL;
-	novo->esq = (v != -1) ? NewNode(-1, preto) : NULL;
+	novo->dir = nulo;
+	novo->esq = nulo;
 	novo->pai = NULL;
 	novo->cor = novaCor;
 
 	return novo;
 }
 
-void RotacaoEsq(Node *noh, Node *raiz)
+Node *RotacaoEsq(Node *noh, Node *raiz, Node *nulo)
 {
 	Node *y = noh->dir;
 	noh->dir = y->esq;
-	if (y->esq != NULL)
+	if (y->esq != nulo)
 		y->esq->pai = noh;
-	y->pai = noh->pai;	if (noh->pai == NULL)
+	y->pai = noh->pai;	if (noh->pai == nulo)
 		raiz = y;
 	else {
 		if (noh == noh->pai->esq)
@@ -34,32 +37,35 @@ void RotacaoEsq(Node *noh, Node *raiz)
 	}
 	y->esq = noh;
 	noh->pai = y;
+
+	return raiz;
 }
 
-void RotacaoDir(Node *noh, Node *raiz)
+Node *RotacaoDir(Node *noh, Node *raiz, Node *nulo)
 {
 	Node *y = noh->esq;
 	noh->esq = y->dir;
-	if (y->dir->dado != -1)
+	if (y->dir != nulo)
 		y->dir->pai = noh;
-	y->pai = noh->pai;	if (noh->pai == NULL)
+	y->pai = noh->pai;	if (noh->pai == nulo)
 	{
 		raiz = y;
 	}
-	else 
-	{
+	else {
 		if (noh == noh->pai->dir)
 			noh->pai->dir = y;
 		else
 			noh->pai->esq = y;
 	}
 	y->dir = noh;
-	noh->esq = y;
+	noh->pai = y;
+	
+	return raiz;
 }
 
-void InsRestaurarPropriedadesRN(Node *noh, Node *raiz)
+Node *InsRestaurarPropriedadesRN(Node *noh, Node *raiz, Node *nulo)
 {
-	Node *y = NULL;
+	Node *y;
 	while (noh->pai->cor == vermelho) 
 	{
 		if (noh->pai == noh->pai->pai->esq) {
@@ -73,14 +79,15 @@ void InsRestaurarPropriedadesRN(Node *noh, Node *raiz)
 			else {
 				if (noh == noh->pai->dir) {
 					noh = noh->pai; // caso 2
-					RotacaoEsq(noh, raiz);
+					raiz = RotacaoEsq(noh, raiz, nulo);
 				}
 				noh->pai->cor = preto; // caso 3
 				noh->pai->pai->cor = vermelho;
-				RotacaoDir(noh->pai->pai, raiz);
+				raiz = RotacaoDir(noh->pai->pai, raiz, nulo);
 			}
 		}
-		else { // caso simetrico }
+		else 
+		{ // caso simetrico 
 			y = noh->pai->pai->esq; // tio
 			if (y->cor == vermelho) {
 				noh->pai->cor = preto; // caso 1
@@ -91,56 +98,51 @@ void InsRestaurarPropriedadesRN(Node *noh, Node *raiz)
 			else {
 				if (noh == noh->pai->esq) {
 					noh = noh->pai; // caso 2
-					RotacaoDir(noh, raiz);
+					raiz = RotacaoDir(noh, raiz, nulo);
 				}
 				noh->pai->cor = preto; // caso 3
 				noh->pai->pai->cor = vermelho;
-				RotacaoEsq(noh->pai->pai, raiz);
+				raiz = RotacaoEsq(noh->pai->pai, raiz, nulo);
 			}
 		}
-		raiz->cor = preto;
-	} // fim
+	}
+	raiz->cor = preto;
+	return raiz;
 }
 
-void insereRN(int v, Node *raiz) {
+Node *insereRN(int v, Node *raiz, Node *nulo) {
 	Node *ant, *p, *novo;
-	ant = NULL;
+	ant = nulo;
 	p = raiz;
 	
-	while (p != NULL) {
+	while (p != nulo) {
 		ant = p;
 		if (v < p->dado)
-		{
-			if (p->esq->dado != -1)
-				p = p->esq;
-			else
-				p = NULL;
-		}
+			p = p->esq;
 		else
-		{
-			if (p->dir->dado != -1)
-				p = p->dir;
-			else
-				p = NULL;
-		}
+			p = p->dir;
 	}
 
-	novo = NewNode(v, vermelho);
+	novo = NewNode(v, vermelho, nulo);
 	novo->pai = ant;
 	
-	if (ant == NULL)
+	if (ant == nulo)
+	{
 		raiz = novo;
+	}
 	else {
 		if (v < ant->dado)
 			ant->esq = novo;
 		else ant->dir = novo;
 	}
-	InsRestaurarPropriedadesRN(novo, raiz);
+	raiz = InsRestaurarPropriedadesRN(novo, raiz, nulo);
+
+	return raiz;
 }
 
 void InOrdem(Node *n)
 {
-	if (n != NULL)
+	if (n != NULL && n->dado != -1)
 	{
 		InOrdem(n->esq);
 		printf("%d ", n->dado);
@@ -150,7 +152,7 @@ void InOrdem(Node *n)
 
 void PreOrdem(Node *n)
 {
-	if (n != NULL)
+	if (n != NULL && n->dado != -1)
 	{
 		printf("%d ", n->dado);
 		PreOrdem(n->esq);
@@ -160,7 +162,7 @@ void PreOrdem(Node *n)
 
 void PosOrdem(Node *n)
 {
-	if (n != NULL)
+	if (n != NULL && n->dado != -1)
 	{
 		PosOrdem(n->esq);
 		PosOrdem(n->dir);

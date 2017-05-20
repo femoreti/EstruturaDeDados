@@ -3,13 +3,23 @@
 
 #include "ArvoreRubroNegra.h"
 
+Node *raiz, *nulo;
 int main(void)
 {
-	Node *raiz;
-	raiz = NewNode(10, preto);
+	
+	nulo = NewNode(-1, preto, NULL);
+	raiz = nulo;
+	raiz = insereRN(10, raiz, nulo);
 
-	insereRN(5, raiz);
-	insereRN(3, raiz);
+	raiz = insereRN(5, raiz, nulo);
+	raiz = insereRN(3, raiz, nulo);
+	raiz = insereRN(7, raiz, nulo);
+	raiz = insereRN(9, raiz, nulo);
+	raiz = insereRN(11, raiz, nulo);
+	raiz = insereRN(12, raiz, nulo);
+	raiz = insereRN(4, raiz, nulo);
+	raiz = insereRN(1, raiz, nulo);
+	//insereRN(3, raiz, nulo);
 
 	PreOrdem(raiz);
 

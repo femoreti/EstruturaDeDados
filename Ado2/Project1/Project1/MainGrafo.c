@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 //#include "GrafosMatriz.h"
-#include "GrafoLista.h"
+ //#include "GrafoLista.h"
 /*
 int main(void)
 {
